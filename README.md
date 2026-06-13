@@ -55,10 +55,11 @@ The platform generates:
 
 ---
 
-## 🏗️ Architecture
+
+
 ## 🏗️ System Architecture
 
-![Architecture](assets/'Sysem Architecture'.png)
+![System Architecture](assets/System%20Architecture.png)
 
 ```text
 Vendor Email / Copilot Chat
