@@ -61,31 +61,13 @@ The platform generates:
 
 ![System Architecture](assets/System%20Architecture.png)
 
-```text
-Vendor Email / Copilot Chat
-            │
-            ▼
-     Intake Agent
-            │
- ┌──────────┼──────────┐
- ▼          ▼          ▼
-Blacklist  Document   GST
-Agent      Agent      Agent
-                         │
-                         ▼
-                   Computer Use
-
- ▼
-Web Presence Agent
- ▼
-AI Risk Scoring Agent
- ▼
-Communication Agent
- ▼
-Investigation Report
-```
 
 ---
+## 🔄 End-to-End Workflow
+
+![Flow Diagram](assets/Flow%20Diagram.png)
+
+
 
 ## 🤝 Multi-Agent Collaboration
 
