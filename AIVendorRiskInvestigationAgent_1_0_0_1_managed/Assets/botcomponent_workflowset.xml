@@ -1,0 +1,11 @@
+<botcomponent_workflowset>
+  <botcomponent_workflow botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.FinalResultCommunicator_PP7" workflowid.workflowid="400b0af2-704c-f111-bec6-000d3a5ae1a4">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.VendorDocumentAnalysis" workflowid.workflowid="7318858b-71f1-ece2-f61a-87fd644a1af8">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.ExternalTriggerComponent.Wh.23e71ecd-0ee3-459b-8ce7-2fd989a8504" workflowid.workflowid="7602f9d8-284a-f111-bec6-7ced8d6e6472">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+</botcomponent_workflowset>

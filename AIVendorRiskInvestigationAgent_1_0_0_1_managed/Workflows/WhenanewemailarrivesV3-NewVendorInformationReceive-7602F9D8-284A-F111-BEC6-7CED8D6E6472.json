@@ -1,0 +1,243 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "rj_CR_Outlook_DEV"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_microsoftcopilotstudio": {
+        "api": {
+          "name": "shared_microsoftcopilotstudio"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "crc94_sharedmicrosoftcopilotstudio_6fa33"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_bdded"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_f45b6"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_new_email_arrives_(V3)": {
+          "type": "OpenApiConnectionNotification",
+          "inputs": {
+            "parameters": {
+              "to": "rjagadale@saxon.ai",
+              "subjectFilter": "Vendor Testing",
+              "folderPath": "Id::AAMkADE4MmRmMDljLThmZDAtNGUzNC04ZDhkLTdhYmJlZTYzOGFlMwAuAAAAAAD-FQ9dZLRKT62E7T1JNVqhAQAykNGSSBhdQZFjHITixlYIAAAAAAEMAAA="
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "operationId": "OnNewEmailV3",
+              "connectionName": "shared_office365"
+            }
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "Id::AAMkADE4MmRmMDljLThmZDAtNGUzNC04ZDhkLTdhYmJlZTYzOGFlMwAuAAAAAAD-FQ9dZLRKT62E7T1JNVqhAQAykNGSSBhdQZFjHITixlYIAAAAAAEMAAA=": "Inbox",
+            "operationMetadataId": "16d81baa-ab90-43e9-b250-e02f2363ed16"
+          }
+        }
+      },
+      "actions": {
+        "Sends_a_prompt_to_the_specified_copilot_for_processing": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "Copilot": "cr981_AIVendorRiskInvestigationAgent",
+              "body/message": "This is New Vendor we received  via Email which saved in Sharepoint List - with Vendor ID - @{outputs('Compose_-_Vendor_ID')} use this vendor id For further Process,\nFollowing is Metadata Recived via Email Body - @{outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/text']}"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
+              "operationId": "ExecuteCopilot",
+              "connectionName": "shared_microsoftcopilotstudio"
+            }
+          },
+          "runAfter": {
+            "Compose_-_Vendor_ID": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "80344046-5ff2-4edd-9201-7c6486aebb87"
+          }
+        },
+        "Run_a_prompt_-_Find_Vendor_Details": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "recordId": "119a4e58-d767-48e3-8192-75f24b70ef15",
+              "item/requestv2/Email_20Body": "@triggerOutputs()?['body/body']"
+            },
+            "host": {
+              "apiId": "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+              "operationId": "aibuilderpredict_customprompt",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {}
+        },
+        "Condition_-_Is_New_Vendor": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/structuredOutput/newVendorEmail']",
+                  true
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Create_item_-_New_Vendor": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+                  "table": "0e213653-16fa-4e4b-ab72-925eacca0061",
+                  "item/Title": "@outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/structuredOutput/vendorName']",
+                  "item/VendorName": "@outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/structuredOutput/vendorName']",
+                  "item/GSTNumber": "@outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/structuredOutput/gstNumber']",
+                  "item/VendorWebsite": "@outputs('Run_a_prompt_-_Find_Vendor_Details')?['body/responsev2/predictionOutput/structuredOutput/vendorWebsite']",
+                  "item/IsBlacklisted": false
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "PostItem",
+                  "connectionName": "shared_sharepointonline"
+                }
+              }
+            },
+            "For_each": {
+              "type": "Foreach",
+              "foreach": "@triggerOutputs()?['body/attachments']",
+              "actions": {
+                "Get_Attachment_(V2)": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "messageId": "@triggerOutputs()?['body/id']",
+                      "attachmentId": "@item()?['id']"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                      "operationId": "GetAttachment_V2",
+                      "connectionName": "shared_office365"
+                    }
+                  }
+                },
+                "Create_file": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+                      "folderPath": "/CR Documents",
+                      "name": "@outputs('Get_Attachment_(V2)')?['body/name']",
+                      "body": "@outputs('Get_Attachment_(V2)')?['body/contentBytes']"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "operationId": "CreateFile",
+                      "connectionName": "shared_sharepointonline"
+                    }
+                  },
+                  "runAfter": {
+                    "Get_Attachment_(V2)": [
+                      "Succeeded"
+                    ]
+                  },
+                  "runtimeConfiguration": {
+                    "contentTransfer": {
+                      "transferMode": "Chunked"
+                    }
+                  }
+                },
+                "Update_file_properties": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+                      "table": "dce94f35-25a3-4146-a1fa-7241337907c9",
+                      "id": "@outputs('Create_file')?['body/ItemId']",
+                      "item/CR_ID": "@outputs('Create_item_-_New_Vendor')?['body/ID']"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                      "operationId": "PatchFileItem",
+                      "connectionName": "shared_sharepointonline"
+                    }
+                  },
+                  "runAfter": {
+                    "Create_file": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              },
+              "runAfter": {
+                "Create_item_-_New_Vendor": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Run_a_prompt_-_Find_Vendor_Details": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Vendor_ID": {
+          "type": "Compose",
+          "inputs": "@outputs('Create_item_-_New_Vendor')?['body/ID']",
+          "runAfter": {
+            "Condition_-_Is_New_Vendor": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "description": "Trigger your agent with certain message upon event: When a new email arrives (V3)."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

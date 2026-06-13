@@ -1,0 +1,33 @@
+kind: AgentDialog
+response:
+  activity:
+  mode: Generated
+
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: GSTNumber
+    description: GST Number of Vendor
+
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: This agent verifies whether a vendor’s GST number is officially registered and valid on the Government GST Portal. It securely fetches and validates GST details directly from the official GST website, including business name, registration status, GST type, address, and other relevant information.
+
+settings:
+  instructions: This agent verifies whether a vendor’s GST number is officially registered and valid on the Government GST Portal. It securely fetches and validates GST details directly from the official GST website, including business name, registration status, GST type, address, and other relevant information.
+
+inputType:
+  properties:
+    GSTNumber:
+      displayName: GST Number
+      description: GST Number of Vendor
+      isRequired: true
+      type: String
+
+outputType:
+  properties:
+    GSTAnalysis:
+      displayName: GST Analysis
+      description: Output of Tool Computer use - GST Verification
+      type:
+        kind: Record

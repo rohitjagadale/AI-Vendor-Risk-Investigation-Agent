@@ -1,0 +1,175 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26054.129" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26061.00133">
+  <Entities></Entities>
+  <Roles></Roles>
+  <Workflows>
+    <Workflow WorkflowId="{400b0af2-704c-f111-bec6-000d3a5ae1a4}" Name="Final Result Communicator">
+      <JsonFileName>/Workflows/FinalResultCommunicator-400B0AF2-704C-F111-BEC6-000D3A5AE1A4.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>1</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="Final Result Communicator" />
+      </LocalizedNames>
+    </Workflow>
+    <Workflow WorkflowId="{7602f9d8-284a-f111-bec6-7ced8d6e6472}" Name="When a new email arrives (V3) - New Vendor Information Received on Email" Description="Trigger your agent with certain message upon event: When a new email arrives (V3).">
+      <JsonFileName>/Workflows/WhenanewemailarrivesV3-NewVendorInformationReceive-7602F9D8-284A-F111-BEC6-7CED8D6E6472.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0.0.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>0</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="When a new email arrives (V3) - New Vendor Information Received on Email" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description languagecode="1033" description="Trigger your agent with certain message upon event: When a new email arrives (V3)." />
+      </Descriptions>
+    </Workflow>
+    <Workflow WorkflowId="{7318858b-71f1-ece2-f61a-87fd644a1af8}" Name="Vendor Document Analysis" Description="When an agent calls the flow and send back a response.">
+      <JsonFileName>/Workflows/VendorDocumentAnalysis-7318858B-71F1-ECE2-F61A-87FD644A1AF8.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>1</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="1033" description="Vendor Document Analysis" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description languagecode="1033" description="When an agent calls the flow and send back a response." />
+      </Descriptions>
+    </Workflow>
+  </Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_a365copilotchatmcp.shared-a365copilotch-8833c667-e796-4684-a2d7-5a4d8e051706">
+      <connectionreferencedisplayname>cr981_AIVendorRiskInvestigationAgent.shared_a365copilotchatmcp.shared-a365copilotch-8833c667-e796-4684-a2d7-5a4d8e051706</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_a365copilotchatmcp</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_a365memcp.shared-a365memcp-e32f3bff-bb8c-4aca-976b-cca22c30e875">
+      <connectionreferencedisplayname>cr981_AIVendorRiskInvestigationAgent.shared_a365memcp.shared-a365memcp-e32f3bff-bb8c-4aca-976b-cca22c30e875</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_a365memcp</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9">
+      <connectionreferencedisplayname>cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_computeroperator</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_sharepointonline.shared-sharepointonl-09e6fccc-4102-41cc-bd6e-5d2c0c9f5cca">
+      <connectionreferencedisplayname>cr981_AIVendorRiskInvestigationAgent.shared_sharepointonline.shared-sharepointonl-09e6fccc-4102-41cc-bd6e-5d2c0c9f5cca</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="crc94_sharedmicrosoftcopilotstudio_6fa33">
+      <connectionreferencedisplayname>Microsoft Copilot Studio (Preview) Craabaf-6fa33</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_bdded">
+      <connectionreferencedisplayname>Microsoft Dataverse</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedsendmail_a22f3">
+      <connectionreferencedisplayname>Mail</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sendmail</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedsharepointonline_f45b6">
+      <connectionreferencedisplayname>SharePoint</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="rj_CR_Outlook_DEV">
+      <connectionreferencedisplayname>CR_Outlook_DEV</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

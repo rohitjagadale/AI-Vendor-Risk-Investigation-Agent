@@ -1,0 +1,15 @@
+kind: AgentDialog
+response:
+  activity:
+  mode: Generated
+
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: The Blacklist & Duplicate Detector Agent validates vendor information against internal master records to identify duplicate vendors and blacklist risks. The agent checks whether a vendor with the same company name or GST Number already exists in the master database and verifies if the vendor is marked as blacklisted, restricted, or high risk. It helps prevent duplicate vendor registrations, fraud attempts, and onboarding of restricted vendors by generating automated validation and risk alerts.
+
+settings:
+  instructions: Use {Topic.Components.Actions.'cr981_AIVendorRiskInvestigationAgent.action.SharePoint-Getitems'.DisplayName} to find out only one items is available for current vendor and not marked as Blacklisted, Give analysis to User
+
+inputType: {}
+outputType: {}

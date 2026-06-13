@@ -1,0 +1,20 @@
+<botcomponent_connectionreferenceset>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.Computeruse-Computeruse" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.Computeruse-Computeruse_oYA" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.SharePoint-Getitems" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_sharepointonline.shared-sharepointonl-09e6fccc-4102-41cc-bd6e-5d2c0c9f5cca">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.action.SharePoint-Updateitem" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_sharepointonline.shared-sharepointonl-09e6fccc-4102-41cc-bd6e-5d2c0c9f5cca">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.topic.WorkIQCopilotPreview" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_a365copilotchatmcp.shared-a365copilotch-8833c667-e796-4684-a2d7-5a4d8e051706">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="cr981_AIVendorRiskInvestigationAgent.topic.WorkIQUserPreview" connectionreferenceid.connectionreferencelogicalname="cr981_AIVendorRiskInvestigationAgent.shared_a365memcp.shared-a365memcp-e32f3bff-bb8c-4aca-976b-cca22c30e875">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+</botcomponent_connectionreferenceset>

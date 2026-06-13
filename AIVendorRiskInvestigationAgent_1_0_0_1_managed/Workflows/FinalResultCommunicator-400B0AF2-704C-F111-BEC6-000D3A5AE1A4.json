@@ -1,0 +1,98 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sendmail": {
+        "api": {
+          "name": "shared_sendmail"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsendmail_a22f3"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "Message",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764"
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {}
+          },
+          "runAfter": {
+            "Send_an_email_notification_(V3)": [
+              "SUCCEEDED"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+          }
+        },
+        "Send_an_email_notification_(V3)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "request/to": "rjagadale@saxon.ai",
+              "request/subject": "Result of New Vendor Onborading",
+              "request/text": "<p class=\"editor-paragraph\">@{triggerBody()?['text']}</p>"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sendmail",
+              "operationId": "SendEmailV3",
+              "connectionName": "shared_sendmail"
+            }
+          },
+          "runAfter": {}
+        }
+      },
+      "outputs": {},
+      "description": "When an agent calls the flow and send back a response."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

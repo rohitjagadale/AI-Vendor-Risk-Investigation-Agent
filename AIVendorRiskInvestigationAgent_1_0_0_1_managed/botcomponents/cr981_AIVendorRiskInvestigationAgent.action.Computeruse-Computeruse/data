@@ -1,0 +1,63 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: gstNumber
+    name: GST Number
+    description: GST Number of Vendor
+
+modelDisplayName: Computer use - GST Verifications
+modelDescription: GST Details Verification by Vendor Name
+action:
+  kind: InvokeComputerUsingAgentTaskAction
+  connectionReference: cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9
+  connectionProperties:
+    mode: Maker
+
+  operationId: ComputerOperatorInvokeMcpCua
+  instructions: |-
+    To verify and validate an Indian GST Number (GSTIN) from the official Indian Government GST portal and extract the registered business details.
+    i. Open the GST verification website URL - https://cleartax.in/gst-number-search/   in a web browser
+    ii. Enter the GST Number (GSTIN) - GST Input for Vendor  in the search/verification field
+    iii. Obtain the following key details from the webpage:
+    – GST Number: The GST Identification Number (GSTIN) provided for verification.
+    – Legal Name of Business: The officially registered legal entity name associated with the GSTIN.
+    – Trade Name: The business or trade name registered under the GSTIN, if available.
+    – GST Status: The current status of the GST registration (e.g., Active, Cancelled, Suspended).
+    – Registration Date: The date on which the GST registration became effective.
+    – Constitution of Business: The type of business entity (e.g., Proprietorship, Partnership, Private Limited Company).
+    – Taxpayer Type: Classification of taxpayer under GST (e.g., Regular, Composition, SEZ, Casual Taxpayer).
+    – State/UT: The state or union territory where the GST is registered.
+    – Principal Place of Business: The primary registered business address associated with the GSTIN.
+    – Jurisdiction: The administrative GST jurisdiction details, if available.
+    iv. Output the response to the agent in a JSON object format.
+    Additional Instructions:
+    – Use only the official Indian Government GST portal for verification.
+    – Do not navigate away from the GST verification website URL.
+    – If the GST Number is invalid, not found, or inactive, clearly mention the status in the output JSON.
+    – If you cannot find all details, return the values for those you can find and return missing details as a blank text string `""`.
+    – Use page up and page down instead of scrolling to navigate a page.
+    – Do not perform page up/page down more than 1 times. If page navigation does not change the content, immediately stop browsing and return the fields that were found, no exceptions.
+    – Do not modify or submit any data other than the GST Number provided for verification.
+    – Ensure extracted details exactly match the information displayed on the government portal.
+    Expected JSON Output Format:
+  inputType:
+    properties:
+      gstNumber:
+        displayName: GST Number
+        description: GST Number of Vendor
+        isRequired: true
+        type: String
+
+  model:
+    modelNameHint: sonnet4-5
+
+  initializeContext:
+    enforceHttps: true
+    requestForInformationInput:
+      assignedTo:
+        edb08543-beb3-4947-91f1-53b9279701e6:
+          email: rjagadale@saxon.ai
+          id: edb08543-beb3-4947-91f1-53b9279701e6
+
+      timeToCompleteInMinutes: 60
+      version: 2

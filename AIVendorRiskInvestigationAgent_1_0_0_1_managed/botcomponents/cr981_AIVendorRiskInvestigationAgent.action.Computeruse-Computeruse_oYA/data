@@ -1,0 +1,41 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: officialWebsiteUrl
+    name: official website URL / vendor Name
+    description: official website URL / Vendor Name
+
+modelDisplayName: Computer use - Web Presence Check
+modelDescription: Use a computer to navigate websites or operate desktop apps to complete tasks.
+action:
+  kind: InvokeComputerUsingAgentTaskAction
+  connectionReference: cr981_AIVendorRiskInvestigationAgent.shared_computeroperator.715f06b031fb4521bdca350fb3c667d9
+  connectionProperties:
+    mode: Maker
+
+  operationId: ComputerOperatorInvokeMcpCua
+  instructions: |-
+    1. Launch the default web browser by clicking on its icon in the taskbar or start menu.
+    2. If the official URL is provided, type it into the browser's address bar and press Enter. If not provided, type the vendor or company name into a search engine (e.g., Google) and press Enter.
+    3. From the search results, identify the official company website (prefer URLs that match the company name and have a trusted domain, such as .com or the country-specific domain). Click the link to open it.
+  inputType:
+    properties:
+      officialWebsiteUrl:
+        displayName: official website URL
+        description: official website URL
+        isRequired: true
+        type: String
+
+  model:
+    modelNameHint: sonnet4-5
+
+  initializeContext:
+    enforceHttps: true
+    requestForInformationInput:
+      assignedTo:
+        edb08543-beb3-4947-91f1-53b9279701e6:
+          email: rjagadale@saxon.ai
+          id: edb08543-beb3-4947-91f1-53b9279701e6
+
+      timeToCompleteInMinutes: 60
+      version: 2

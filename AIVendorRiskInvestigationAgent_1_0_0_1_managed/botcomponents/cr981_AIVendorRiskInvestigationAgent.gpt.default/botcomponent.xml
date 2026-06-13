@@ -1,0 +1,11 @@
+<botcomponent schemaname="cr981_AIVendorRiskInvestigationAgent.gpt.default">
+  <componenttype>15</componenttype>
+  <description>Specialized AI Agents Collaborate to automatously investigate vendors assess risk and recommend actions</description>
+  <iscustomizable>0</iscustomizable>
+  <name>AI Vendor Risk Investigation Agent</name>
+  <parentbotid>
+    <schemaname>cr981_AIVendorRiskInvestigationAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

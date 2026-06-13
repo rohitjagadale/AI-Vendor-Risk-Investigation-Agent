@@ -1,0 +1,18 @@
+kind: GptComponentMetadata
+displayName: AI Vendor Risk Investigation Agent
+instructions: |+
+  1] Get Vendor ID From Trigger Flow - When a new email arrives (V3) - New Vendor Information Received on Email.
+  2] Now Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent__HT'.DisplayName}  Sub Agent.
+  3] Now Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent_cGA'.DisplayName} Sub Agent and Pass Vendor ID.
+  4] Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent'.DisplayName} 
+  5] Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent_s97'.DisplayName} 
+  6] Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent_H0J'.DisplayName} 
+  7] Call {System.Bot.Components.Agents.'cr981_AIVendorRiskInvestigationAgent.agent.Agent_M7x'.DisplayName} 
+
+
+gptCapabilities:
+  webBrowsing: false
+
+aISettings:
+  model:
+    modelNameHint: GPT41

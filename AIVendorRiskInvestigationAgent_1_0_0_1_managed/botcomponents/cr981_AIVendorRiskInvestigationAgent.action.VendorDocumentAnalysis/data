@@ -1,0 +1,22 @@
+kind: TaskDialog
+response:
+  activity:
+  mode: Generated
+
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: text
+    description: Vendor ID
+
+outputs:
+  - propertyName: document_analysis_
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 7318858b-71f1-ece2-f61a-87fd644a1af8
+  connectionProperties:
+    $kind: ConnectionProperties
+    diagnostics:
+    mode: Invoker
+
+outputMode: All

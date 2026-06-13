@@ -1,0 +1,17 @@
+kind: AgentDialog
+response:
+  activity:
+  mode: Generated
+
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: The Document Intelligence Agent analyzes and validates vendor-submitted documents using AI-powered document processing and metadata extraction. The agent verifies whether the uploaded documents belong to the specified vendor and extracts key business details such as GST Number, PAN Number, Bank Account Number, company name, and other relevant metadata. It helps automate document verification, reduce manual validation efforts, and identify missing, mismatched, or suspicious information during the vendor onboarding and risk assessment process.
+
+settings:
+  instructions: |-
+    You only get called by parent Agent after that , Use {Topic.Components.Actions.'cr981_AIVendorRiskInvestigationAgent.action.VendorDocumentAnalysis'.DisplayName} Tool For Document Analysis and Provide analysis to user Describe each Documents Present in response is valid or not if not why , Key metadata Extracted from Documents
+    Then Update Item using {Topic.Components.Actions.'cr981_AIVendorRiskInvestigationAgent.action.SharePoint-Updateitem'.DisplayName} 
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,12 @@
+<botcomponent schemaname="cr981_AIVendorRiskInvestigationAgent.ExternalTriggerComponent.Wh.23e71ecd-0ee3-459b-8ce7-2fd989a8504">
+  <componenttype>17</componenttype>
+  <description>Trigger your agent with certain message upon event: When a new email arrives (V3).</description>
+  <iconurl>https://static.powerapps.com/resource/ppcr/releases/v1.0.1802/1.0.1802.4700/office365/icon.png</iconurl>
+  <iscustomizable>0</iscustomizable>
+  <name>When a new email arrives (V3) - New Vendor Information Received on Email</name>
+  <parentbotid>
+    <schemaname>cr981_AIVendorRiskInvestigationAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

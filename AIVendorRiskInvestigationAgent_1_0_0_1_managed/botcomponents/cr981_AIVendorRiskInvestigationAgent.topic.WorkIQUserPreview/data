@@ -1,0 +1,11 @@
+kind: TaskDialog
+modelDisplayName: Work IQ User (Preview)
+action:
+  kind: InvokeExternalAgentTaskAction
+  connectionReference: cr981_AIVendorRiskInvestigationAgent.shared_a365memcp.shared-a365memcp-e32f3bff-bb8c-4aca-976b-cca22c30e875
+  connectionProperties:
+    mode: Invoker
+
+  operationDetails:
+    kind: ModelContextProtocolMetadata
+    operationId: mcp_MeServer

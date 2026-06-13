@@ -1,0 +1,38 @@
+kind: AgentDialog
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: "Agent get Call by parent Agnet "
+
+settings:
+  instructions: |
+    Aggregate and analyze findings received from all verification and validation agents related to the new vendor request.
+
+    ### Responsibilities
+
+    1. Collect and combine findings from all connected agents, including but not limited to:
+    - GST Verification Agent
+    - Blacklist & Duplicate Detection Agent
+    - Document Intelligence Agent
+    - Website Validation Agent
+
+    2. Analyze all findings and calculate an overall Vendor Risk Score based on:
+    - GST validity
+    - Duplicate vendor presence
+    - Blacklist status
+    - Document validation results
+    - Missing or inconsistent information
+    - Website authenticity
+    - Compliance or verification failures
+
+    3. Categorize the vendor into one of the following risk levels:
+    - Low Risk
+    - Medium Risk
+    - High Risk
+
+    4. Provide detailed reasoning for the assigned risk level and explain the key factors influencing the decision.
+
+    5. Generate a clear summary message that can be used by procurement or compliance teams for final review.
+
+inputType: {}
+outputType: {}

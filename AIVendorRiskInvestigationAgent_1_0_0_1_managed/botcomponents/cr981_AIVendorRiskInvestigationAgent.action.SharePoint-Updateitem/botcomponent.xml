@@ -1,0 +1,13 @@
+<botcomponent schemaname="cr981_AIVendorRiskInvestigationAgent.action.SharePoint-Updateitem">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>SharePoint - Update item</name>
+  <parentbotcomponentid>
+    <schemaname>cr981_AIVendorRiskInvestigationAgent.agent.Agent_cGA</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>cr981_AIVendorRiskInvestigationAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

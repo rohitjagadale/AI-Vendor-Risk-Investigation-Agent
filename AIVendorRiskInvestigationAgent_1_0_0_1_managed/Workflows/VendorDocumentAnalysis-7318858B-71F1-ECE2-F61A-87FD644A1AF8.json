@@ -1,0 +1,298 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_f45b6"
+        },
+        "runtimeSource": "invoker"
+      },
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_bdded"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "Please enter your input",
+                  "title": "vendorId",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764"
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "document_analysis_": {
+                  "title": "Document Analysis ",
+                  "description": "",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "document_analysis_": "@{outputs('Run_a_prompt_-_Document_Validator')?['body/responsev2/predictionOutput/text']}"
+            }
+          },
+          "runAfter": {
+            "Run_a_prompt_-_Document_Validator": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+          }
+        },
+        "Get_files_(properties_only)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+              "table": "dce94f35-25a3-4146-a1fa-7241337907c9",
+              "$filter": "CR_ID eq '@{triggerBody()?['text']}'"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "GetFileItems",
+              "connectionName": "shared_sharepointonline"
+            }
+          },
+          "runAfter": {
+            "Get_item_-_Vendor_Master": [
+              "Succeeded"
+            ]
+          }
+        },
+        "For_each": {
+          "type": "Foreach",
+          "foreach": "@outputs('Get_files_(properties_only)')?['body/value']",
+          "actions": {
+            "Get_file_content": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+                  "id": "@items('For_each')?['{Identifier}']",
+                  "inferContentType": true
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "GetFileContent",
+                  "connectionName": "shared_sharepointonline"
+                }
+              }
+            },
+            "Recognize_text_in_image_or_document": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "item/requestv2/base64Encoded": "@body('Get_file_content')"
+                },
+                "host": {
+                  "apiId": "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+                  "operationId": "aibuilderpredict_textrecognition",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Get_file_content": [
+                  "SUCCEEDED"
+                ]
+              }
+            },
+            "Update_file_properties": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+                  "table": "dce94f35-25a3-4146-a1fa-7241337907c9",
+                  "id": "@items('For_each')?['ID']",
+                  "item/DocumentDesc": "@outputs('Recognize_text_in_image_or_document')?['body/responsev2/predictionOutput/fullText']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "PatchFileItem",
+                  "connectionName": "shared_sharepointonline"
+                }
+              },
+              "runAfter": {
+                "Recognize_text_in_image_or_document": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Append_to_string_variable": {
+              "type": "AppendToStringVariable",
+              "inputs": {
+                "name": "Documents Summary",
+                "value": "@outputs('Run_a_prompt_-_Document_Metadata_Finder_')?['body/responsev2/predictionOutput/text']"
+              },
+              "runAfter": {
+                "Run_a_prompt_-_Document_Metadata_Finder_": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Run_a_prompt_-_Document_Metadata_Finder_": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "recordId": "184aafed-9e33-4c5f-9ad5-d062e4d1b8ae",
+                  "item/requestv2/Document_20Name": "@items('For_each')?['{Name}']",
+                  "item/requestv2/Document_20Text": "@outputs('Recognize_text_in_image_or_document')?['body/responsev2/predictionOutput/fullText']",
+                  "item/requestv2/Document_20ID": "@items('For_each')?['ID']"
+                },
+                "host": {
+                  "apiId": "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+                  "operationId": "aibuilderpredict_customprompt",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Update_file_properties": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_-_Documents_Summary": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_-_Documents_Summary": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Documents Summary",
+                "type": "string"
+              }
+            ]
+          },
+          "runAfter": {
+            "Get_files_(properties_only)": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Document_Summery_": {
+          "type": "Compose",
+          "inputs": "@variables('Documents Summary')",
+          "runAfter": {
+            "For_each": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Run_a_prompt_-_Document_Validator": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "recordId": "b39467ae-c5c8-4984-a383-715f1edc016b",
+              "item/requestv2/Document_20Summaries": "@variables('Documents Summary')",
+              "item/requestv2/Master_20Metadata": "@outputs('Compose_-_Master_Details')"
+            },
+            "host": {
+              "apiId": "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+              "operationId": "aibuilderpredict_customprompt",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Compose_-_Master_Details": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Get_item_-_Vendor_Master": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://saxontech.sharepoint.com/sites/Tranings2024/C3IT0780",
+              "table": "0e213653-16fa-4e4b-ab72-925eacca0061",
+              "id": "@outputs('Compose_-_Vendor_ID')"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "GetItem",
+              "connectionName": "shared_sharepointonline"
+            }
+          },
+          "runAfter": {
+            "Compose_-_Vendor_ID": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Vendor_ID": {
+          "type": "Compose",
+          "inputs": "@triggerBody()?['text']",
+          "runAfter": {}
+        },
+        "Compose_-_Master_Details": {
+          "type": "Compose",
+          "inputs": "Vendor Name - @{outputs('Get_item_-_Vendor_Master')?['body/VendorName']}\nVendor GST Number - @{outputs('Get_item_-_Vendor_Master')?['body/GSTNumber']}\nVendor Website - @{outputs('Get_item_-_Vendor_Master')?['body/VendorWebsite']}",
+          "runAfter": {
+            "Compose_-_Document_Summery_": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {},
+      "description": "When an agent calls the flow and send back a response."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

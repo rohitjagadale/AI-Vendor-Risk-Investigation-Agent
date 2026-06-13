@@ -1,0 +1,11 @@
+kind: AgentDialog
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: The Web Presence Agent autonomously analyzes a vendor’s digital footprint across public web sources to evaluate legitimacy, reputation, and operational credibility. It scans official websites, business directories, social platforms, news mentions, and online references to identify red flags such as inactive domains, suspicious content, inconsistent company information, or negative public sentiment. The agent generates structured insights that help enterprises assess vendor authenticity, trustworthiness, and overall web presence as part of the vendor risk investigation workflow.
+
+settings:
+  instructions:
+
+inputType: {}
+outputType: {}

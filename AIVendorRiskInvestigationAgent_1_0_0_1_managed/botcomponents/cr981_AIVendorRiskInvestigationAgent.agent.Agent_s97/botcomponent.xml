@@ -1,0 +1,10 @@
+<botcomponent schemaname="cr981_AIVendorRiskInvestigationAgent.agent.Agent_s97">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Web Presence Agent</name>
+  <parentbotid>
+    <schemaname>cr981_AIVendorRiskInvestigationAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

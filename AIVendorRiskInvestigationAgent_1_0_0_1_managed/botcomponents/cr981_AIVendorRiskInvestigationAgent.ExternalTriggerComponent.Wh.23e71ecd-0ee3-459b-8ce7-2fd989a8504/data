@@ -1,0 +1,9 @@
+kind: ExternalTriggerConfiguration
+externalTriggerSource:
+  kind: WorkflowExternalTrigger
+  flowId: 7602f9d8-284a-f111-bec6-7ced8d6e6472
+
+extensionData:
+  flowName: 7cb20d51-053c-2fc2-bd54-94e9acf259a8
+  flowUrl: /providers/Microsoft.ProcessSimple/environments/926ceae3-92fd-ed90-b348-356d9d10ce1c/flows/7cb20d51-053c-2fc2-bd54-94e9acf259a8
+  triggerConnectionType: Office 365 Outlook
