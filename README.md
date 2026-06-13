@@ -1,6 +1,13 @@
 # 🤖 AI Vendor Risk Investigation Agent
 
 > Autonomous Multi-Agent Enterprise Risk Intelligence Platform for Vendor Onboarding & Compliance Verification
+> ## 🎥 Demo Video
+
+👉 **Watch the complete project demonstration here:**
+
+[![Watch Demo](https://img.shields.io/badge/▶-Watch%20Demo-red?style=for-the-badge)](https://youtu.be/GQJ1u5ztw7E)
+
+🔗 Demo Link: https://youtu.be/GQJ1u5ztw7E
 
 ## 📌 Overview
 
